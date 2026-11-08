@@ -150,7 +150,8 @@ async function ensureDir(path) {
   }
 }
 
-const server = new McpServer({ name: 'ugreen-nas', version: '0.2.2' })
+const { version: VERSION } = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf8'))
+const server = new McpServer({ name: 'ugreen-nas', version: VERSION })
 
 server.registerTool('nas_list', {
   title: '列出 NAS 目录',

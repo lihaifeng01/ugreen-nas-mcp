@@ -143,6 +143,24 @@ rm ~/Library/LaunchAgents/com.ugreen-nas-mcp.forward.plist
 - 追加 = 读出旧内容 → 拼接 → 整体覆盖（与服务端的 md5 一致性校验无关）
 - `lib/catalog.json` 只保留文件相关的 6 个方法及其消息类型
 
+## 开发与打包
+
+```bash
+git clone https://github.com/lihaifeng01/ugreen-nas-mcp.git
+cd ugreen-nas-mcp && npm install
+npm test        # 用模拟 NAS 跑端到端测试
+```
+
+改完代码后打包成 Claude 桌面版扩展：
+
+1. 把 `package.json` 和 `manifest.json` 里的 `version` 改成同一个新版本号（如 `0.2.3`）
+2. 运行 `npm run pack`：会检查版本号、安装依赖、跑测试，然后在当前目录生成 `ugreen-nas.mcpb`
+3. 双击新的 `ugreen-nas.mcpb` 覆盖安装，⌘Q 退出 Claude 后重开
+
+`.mcpbignore` 决定哪些文件不进安装包（README、测试、脚本等）；`node_modules` 会打进去，所以扩展不依赖电脑上的 Node。
+
+发布新版本：提交并推送代码，在 GitHub 上新建 Release（标签如 `v0.2.3`），把 `ugreen-nas.mcpb` 作为附件上传。
+
 ## 致谢
 
 协议分析、protobuf 编解码（`lib/protobuf.js`）、HTTP 客户端（`lib/opencli.js`，有修改）和 schema（`lib/catalog.json`，已裁剪）来自 [dsh-ugreen-nas](https://github.com/BuvkB/dsh-ugreen-nas)（MIT，© 2026 BuvkB），许可见 `LICENSE.dsh-ugreen-nas`。
