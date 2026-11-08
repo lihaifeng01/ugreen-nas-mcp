@@ -1,0 +1,8 @@
+README.md
+LICENSE
+LICENSE.dsh-ugreen-nas
+package-lock.json
+*.mcpb
+test/
+.git/
+.gitignore

@@ -1,0 +1,41 @@
+{
+  "name": "ugreen-nas-mcp",
+  "version": "0.2.2",
+  "description": "MCP server for UGREEN NAS file read/write via UGOS Pro access tokens (OpenCLI).",
+  "type": "module",
+  "bin": {
+    "ugreen-nas-mcp": "./index.js"
+  },
+  "main": "./index.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.20.0",
+    "zod": "^3.25.0"
+  },
+  "scripts": {
+    "test": "node test/e2e.test.mjs",
+    "pack": "mcpb pack . ugreen-nas.mcpb"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lihaifeng01/ugreen-nas-mcp.git"
+  },
+  "keywords": [
+    "mcp",
+    "ugreen",
+    "nas",
+    "ugos",
+    "claude"
+  ],
+  "files": [
+    "index.js",
+    "lib",
+    "manifest.json",
+    "README.md",
+    "LICENSE",
+    "LICENSE.dsh-ugreen-nas"
+  ]
+}

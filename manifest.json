@@ -1,0 +1,93 @@
+{
+  "manifest_version": "0.3",
+  "name": "ugreen-nas-mcp",
+  "display_name": "绿联 NAS 文件",
+  "version": "0.2.2",
+  "description": "用绿联 UGOS Pro 访问令牌读写 NAS 文件（列目录、读、写、建文件夹，无删除）。",
+  "author": {
+    "name": "lihaifeng01",
+    "url": "https://github.com/lihaifeng01"
+  },
+  "license": "MIT",
+  "server": {
+    "type": "node",
+    "entry_point": "index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": [
+        "${__dirname}/index.js"
+      ],
+      "env": {
+        "UGREEN_NAS_ENDPOINT": "${user_config.endpoint}",
+        "UGREEN_NAS_TOKEN": "${user_config.token}",
+        "UGREEN_NAS_WRITE_ROOT": "${user_config.write_root}",
+        "UGREEN_NAS_VERIFY_TLS": "${user_config.verify_tls}"
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "nas_list",
+      "description": "列出 NAS 目录"
+    },
+    {
+      "name": "nas_stat",
+      "description": "查看文件/文件夹属性"
+    },
+    {
+      "name": "nas_read",
+      "description": "读取文件"
+    },
+    {
+      "name": "nas_write",
+      "description": "新建/覆盖/追加文件"
+    },
+    {
+      "name": "nas_mkdir",
+      "description": "创建文件夹"
+    }
+  ],
+  "user_config": {
+    "endpoint": {
+      "type": "string",
+      "title": "NAS 地址",
+      "description": "局域网 IP（如 192.168.1.10，自动用 9443 端口）、UGREENlink/DDNS 域名或完整 URL",
+      "required": true
+    },
+    "token": {
+      "type": "string",
+      "title": "访问令牌",
+      "description": "控制面板 → 账号设置 → 访问令牌 创建的 ugpoa_v1.xxx 令牌，只勾 Files 的列表/读取/上传/建文件夹权限",
+      "sensitive": true,
+      "required": true
+    },
+    "write_root": {
+      "type": "string",
+      "title": "允许写入的目录（建议填写）",
+      "description": "只允许在该目录下写入，例如 /home/你的NAS用户名/Claude备份；留空则不限制",
+      "required": false,
+      "default": ""
+    },
+    "verify_tls": {
+      "type": "boolean",
+      "title": "校验 HTTPS 证书",
+      "description": "NAS 使用自签证书时保持关闭",
+      "required": false,
+      "default": false
+    }
+  },
+  "compatibility": {
+    "platforms": [
+      "darwin",
+      "win32"
+    ],
+    "runtimes": {
+      "node": ">=20.0.0"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lihaifeng01/ugreen-nas-mcp.git"
+  },
+  "homepage": "https://github.com/lihaifeng01/ugreen-nas-mcp"
+}
